@@ -42,19 +42,62 @@ public class Puzzle {
         MouseDragger dragger = new MouseDragger();
         Random random = new Random();
         BufferedImage temp = new BufferedImage(200, 100, BufferedImage.TYPE_INT_RGB);
-        for(int i = 1; i < 5; i++)
+        
+        //Win conditionsy kurwa mać
+        
+        int[][] gamearray = new int[5][5];
+        int ri;
+        int rj;
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++){
+                gamearray[i][j]=-1;
+                }
+        }
+            
+        
+        
+        
+        for(int i = 1; i <= 5; i++)
+        {
+            for(int j = 1; j <= 5; j++)
+            {
+                for(;;)
+                {
+                    ri=random.nextInt(5);
+                    rj=random.nextInt(5);
+                    if(gamearray[ri][rj]==-1)
+                    {
+                        gamearray[ri][rj]=i*5+j;
+                        break;
+                    }
+                }
+                temp = image.getSubimage((i-1)*200, (j-1)*100, 200, 100);
+                JLabel draggableImage = new JLabel(new ImageIcon(temp));
+                draggableImage.setSize(draggableImage.getPreferredSize());
+                draggableImage.setLocation((ri)*200, (rj)*100);                                                                    
+                dragger.makeDraggable(draggableImage);
+                contentPane.add(draggableImage);
+            }
+        }
+        
+        
+        
+        
+        /*
+          for(int i = 1; i < 5; i++)
         {
             for(int j = 1; j < 5; j++)
             {
                 temp = image.getSubimage((i-1)*200, (j-1)*100, 200, 100);
                 JLabel draggableImage = new JLabel(new ImageIcon(temp));
                 draggableImage.setSize(draggableImage.getPreferredSize());
-                draggableImage.setLocation((i-1)*200, (j-1)*100);       ///<----Tutaj trzeba dodać losowanie pozycji (wg. i & j)        
-                                                                                    
+                draggableImage.setLocation();
                 dragger.makeDraggable(draggableImage);
                 contentPane.add(draggableImage);
             }
         }
+
+        */
 //        BufferedImage resizedImage = new BufferedImage(new_width, new_height, BufferedImage.TYPE_INT_ARGB); 
 //Graphics2D g = resizedImage.createGraphics();
 //g.drawImage(image, 0, 0, new_width, new_height, null);
