@@ -33,7 +33,6 @@ public class Puzzle {
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
-        //ImageIcon image = new ImageIcon(((new ImageIcon("red-05.jpg")).getImage()).getScaledInstance(1000, 500, java.awt.Image.SCALE_SMOOTH));
         BufferedImage image = new BufferedImage(1000, 500, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = image.createGraphics();
         g.drawImage(ImageIO.read(new File("test.jpeg")), 0, 0, 1000, 500, null);
@@ -41,7 +40,7 @@ public class Puzzle {
         //image = ImageIO.read(new File("test.jpeg"));
         MouseDragger dragger = new MouseDragger();
         Random random = new Random();
-        BufferedImage temp = new BufferedImage(200, 100, BufferedImage.TYPE_INT_RGB);
+        BufferedImage temp;
         
         //Win conditionsy kurwa mać
         
@@ -51,12 +50,9 @@ public class Puzzle {
         for(int i=0;i<5;i++){
             for(int j=0;j<5;j++){
                 gamearray[i][j]=-1;
-                }
+            }
         }
             
-        
-        
-        
         for(int i = 1; i <= 5; i++)
         {
             for(int j = 1; j <= 5; j++)
@@ -129,10 +125,7 @@ public class Puzzle {
                 try {
                     new Puzzle().initUI();
                 } catch (MalformedURLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 } catch (IOException ex) {
-                    ex.printStackTrace();
                 }
             }
         });
