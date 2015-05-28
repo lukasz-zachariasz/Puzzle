@@ -79,47 +79,7 @@ public class Puzzle {
                 contentPane.add(draggableImage);
             }
         }
-        
-        
-        
-        
-        /*
-          for(int i = 1; i < 5; i++)
-        {
-            for(int j = 1; j < 5; j++)
-            {
-                temp = image.getSubimage((i-1)*200, (j-1)*100, 200, 100);
-                JLabel draggableImage = new JLabel(new ImageIcon(temp));
-                draggableImage.setSize(draggableImage.getPreferredSize());
-                draggableImage.setLocation();
-                dragger.makeDraggable(draggableImage);
-                contentPane.add(draggableImage);
-            }
-        }
-
-        */
-//        BufferedImage resizedImage = new BufferedImage(new_width, new_height, BufferedImage.TYPE_INT_ARGB); 
-//Graphics2D g = resizedImage.createGraphics();
-//g.drawImage(image, 0, 0, new_width, new_height, null);
-//g.dispose();
-//BufferedImage bi = new BufferedImage(
-//    icon.getIconWidth(),
-//    icon.getIconHeight(),
-//    BufferedImage.TYPE_INT_RGB);
-//Graphics g = bi.createGraphics();
-//// paint the Icon to the BufferedImage.
-//icon.paintIcon(null, g, 0,0);
-//g.dispose();
-//        for (int i = 0; i < 25; i++) {
-//            JLabel draggableImage = new JLabel(image);
-//            draggableImage.setSize(draggableImage.getPreferredSize());
-//            draggableImage.setLocation(random.nextInt(contentPane.getWidth() - draggableImage.getWidth()),
-//                    random.nextInt(contentPane.getHeight() - draggableImage.getHeight()));
-//
-//            dragger.makeDraggable(draggableImage);
-//            contentPane.add(draggableImage);
-//        }
-        
+       
         contentPane.repaint();
     }
 
