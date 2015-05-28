@@ -10,16 +10,20 @@ import java.net.MalformedURLException;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Puzzle {
 
     private JLayeredPane contentPane;
+    private File selectedFile;
 
     protected void initUI() throws MalformedURLException, IOException {
+        //załadowanie okna gry
         JFrame frame = new JFrame(Puzzle.class.getSimpleName());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = new JLayeredPane();
@@ -29,9 +33,25 @@ public class Puzzle {
         frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
+        
+        //wczytywanie plików
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        String[] EXTENSION=new String[]{"jpeg","jpg","png","bmp"};
+        FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("Pliki obrazów", EXTENSION);
+            fileChooser.setFileFilter(xmlfilter);
+        int result = fileChooser.showOpenDialog(frame);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile();
+        }
+        else if (result == JFileChooser.CANCEL_OPTION) {
+            System.exit(0);
+        }
+        
+        //wczytanie obrazu z wybranego pliku
         BufferedImage image = new BufferedImage(1000, 500, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = image.createGraphics();
-        g.drawImage(ImageIO.read(new File("test.jpeg")), 0, 0, 1000, 500, null);
+        g.drawImage(ImageIO.read(selectedFile), 0, 0, 1000, 500, null);
         g.dispose();
         MouseDragger dragger = new MouseDragger();
         Random random = new Random();
@@ -39,6 +59,7 @@ public class Puzzle {
         
         //Win conditionsy kurwa mać
         
+        //przetasowanie kawałków
         int[][] gamearray = new int[5][5];
         int ri;
         int rj;
@@ -47,7 +68,8 @@ public class Puzzle {
                 gamearray[i][j]=-1;
             }
         }
-            
+        
+        //pocięcie wybranego obrazu i wyświetlenie w tablicy przetasowań
         for(int i = 1; i <= 5; i++)
         {
             for(int j = 1; j <= 5; j++)
