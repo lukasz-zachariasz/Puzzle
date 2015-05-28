@@ -1,12 +1,8 @@
 package puzzle;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +33,6 @@ public class Puzzle {
         Graphics2D g = image.createGraphics();
         g.drawImage(ImageIO.read(new File("test.jpeg")), 0, 0, 1000, 500, null);
         g.dispose();
-        //image = ImageIO.read(new File("test.jpeg"));
         MouseDragger dragger = new MouseDragger();
         Random random = new Random();
         BufferedImage temp;
@@ -75,46 +70,7 @@ public class Puzzle {
                 contentPane.add(draggableImage);
             }
         }
-       
         contentPane.repaint();
-    }
-
-    public static class MouseDragger extends MouseAdapter {
-        private Point lastLocation;
-        private Component draggedComponent;
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            draggedComponent = e.getComponent();
-            lastLocation = SwingUtilities.convertPoint(draggedComponent, e.getPoint(), draggedComponent.getParent());
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent e) {
-            Point location = SwingUtilities.convertPoint(draggedComponent, e.getPoint(), draggedComponent.getParent());
-            if (draggedComponent.getParent().getBounds().contains(location)) {
-                Point newLocation = draggedComponent.getLocation();
-                newLocation.translate(location.x - lastLocation.x, location.y - lastLocation.y);
-                newLocation.x = Math.max(newLocation.x, 0);
-                newLocation.x = Math.min(newLocation.x, draggedComponent.getParent().getWidth() - draggedComponent.getWidth());
-                newLocation.y = Math.max(newLocation.y, 0);
-                newLocation.y = Math.min(newLocation.y, draggedComponent.getParent().getHeight() - draggedComponent.getHeight());
-                draggedComponent.setLocation(newLocation);
-                lastLocation = location;
-            }
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            lastLocation = null;
-            draggedComponent = null;
-        }
-
-        public void makeDraggable(Component component) {
-            component.addMouseListener(this);
-            component.addMouseMotionListener(this);
-        }
-
     }
 
     public static void main(String[] args) {
