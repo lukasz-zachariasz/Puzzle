@@ -49,8 +49,8 @@ public class Puzzle {
                 temp = image.getSubimage((i-1)*200, (j-1)*100, 200, 100);
                 JLabel draggableImage = new JLabel(new ImageIcon(temp));
                 draggableImage.setSize(draggableImage.getPreferredSize());
-                draggableImage.setLocation((i-1)*200, (j-1)*100); //random.nextInt(contentPane.getWidth() - draggableImage.getWidth()),
-                                                                  //random.nextInt(contentPane.getHeight() - draggableImage.getHeight())
+                draggableImage.setLocation((i-1)*200, (j-1)*100);       ///<----Tutaj trzeba dodać losowanie pozycji (wg. i & j)        
+                                                                                    
                 dragger.makeDraggable(draggableImage);
                 contentPane.add(draggableImage);
             }
