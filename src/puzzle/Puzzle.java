@@ -30,17 +30,17 @@ public class Puzzle extends JFrame {
     private static Long czas;
 
     static int check() throws FileNotFoundException {
-        for(int i=0;i<5;i++)
+        for(int i = 0; i < 5; i++)
         {
-            for(int j=0;j<5;j++)
+            for(int j = 0; j < 5; j++)
             {
-                if(!(gamearray[i][j]==i*5+j))
+                if(!(gamearray[i][j] == i*5 + j))
                 {
                     return 0;
                 }
         }
     }
-                czas=System.currentTimeMillis()-czas;
+                czas = System.currentTimeMillis() - czas;
                 
                                 File file = new File("rank.txt");
                                 Scanner in = new Scanner(file);
@@ -50,19 +50,20 @@ public class Puzzle extends JFrame {
                                 tab[1]=in.nextLong();
                                 tab[2]=in.nextLong();
                                 in.close();
-                                if(czas>tab[0]&&czas>tab[1]&&czas<tab[2])
+                                if(czas > tab[0] && czas > tab[1] && czas < tab[2])
                                 {
-                                    tab[2]=czas;
+                                    tab[2] = czas;
                                 }
-                                if(czas>tab[0]&&czas<tab[1]){
-                                    tab[2]=tab[1];
-                                    tab[1]=czas;
+                                if(czas > tab[0] && czas < tab[1])
+                                {
+                                    tab[2] = tab[1];
+                                    tab[1] = czas;
                                 }
-                                if(czas<tab[0]){
-                                    temp=tab[0];
-                                    tab[0]=czas;
-                                    tab[2]=tab[1];
-                                    tab[1]=temp;
+                                if( czas < tab[0]) {
+                                    temp = tab[0];
+                                    tab[0] = czas;
+                                    tab[2] = tab[1];
+                                    tab[1] = temp;
                                 }
                 
                  PrintWriter zapis = new PrintWriter("rank.txt");
@@ -154,10 +155,9 @@ public class Puzzle extends JFrame {
                 draggableImage.setLocation((ri)*200, (rj)*100);                                                                    
                 dragger.makeDraggable(draggableImage);
                 contentPane.add(draggableImage);
-                //contentPane.getComponentZOrder(contentPane.add(draggableImage));
             }
-    }
         }
+    }
 
     protected void initUI() throws MalformedURLException, IOException {
         //załadowanie okna gry
@@ -167,9 +167,6 @@ public class Puzzle extends JFrame {
         contentPane.setBackground(Color.WHITE);
         contentPane.setOpaque(true);
         frame.setContentPane(contentPane);
-        
-        
-        //frame.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         frame.setSize(1005, 525);
         frame.setExtendedState(frame.getExtendedState());// | JFrame.MAXIMIZED_BOTH);
         frame.setResizable(false);
@@ -209,6 +206,19 @@ public class Puzzle extends JFrame {
             private void jButton2ActionPerformed(ActionEvent evt) throws FileNotFoundException {
 
                 File file = new File("rank.txt");
+                if(!file.exists())
+                {
+                    try {
+                        file.createNewFile();
+                        try (PrintWriter writer = new PrintWriter(file, "UTF-8")) {
+                        writer.println(101000);
+                        writer.println(102000);
+                        writer.println(103000);
+                        }  
+                    } catch (IOException ex) {
+                    }
+                }
+                
                 Scanner in = new Scanner(file);
                 jLabel1.setText("1."+in.nextLine());
                 jLabel2.setText("2."+in.nextLine());
@@ -305,7 +315,6 @@ public class Puzzle extends JFrame {
                 JButton buttonStart = new JButton("Start");
         buttonStart.setLocation(100, 100);
         buttonStart.setVisible(true);
-        //buttonStart.addActionListener((ActionListener) this);
         contentPane.add(buttonStart);  
     }
 }
