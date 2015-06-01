@@ -1,19 +1,12 @@
 package puzzle;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.StreamCorruptedException;
 import java.net.MalformedURLException;
 import java.util.Random;
 import java.util.Scanner;
@@ -26,8 +19,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -55,6 +46,8 @@ public class Puzzle extends JFrame {
         jButton1.setVisible(false);
         jButton2.setVisible(false);
         jButton3.setVisible(false);
+        
+        //okienko wczytywania
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         String[] EXTENSION=new String[]{"jpeg","jpg","png","bmp"};
@@ -81,7 +74,6 @@ public class Puzzle extends JFrame {
         Random random = new Random();
         BufferedImage temp;
         
-        //Win conditionsy kurwa mać
         
         //przetasowanie kawałków
         gamearray = new int[5][5];
@@ -115,8 +107,8 @@ public class Puzzle extends JFrame {
                 dragger.makeDraggable(draggableImage);
                 contentPane.add(draggableImage);
             }
-    }
         }
+    }
 
     protected void initUI() throws MalformedURLException, IOException {
         //załadowanie okna gry
@@ -165,6 +157,7 @@ public class Puzzle extends JFrame {
                 }
             }
 
+            //wczytanie rankingu
             private void jButton2ActionPerformed(ActionEvent evt) throws FileNotFoundException {
 
                 File file = new File("rank.txt");
