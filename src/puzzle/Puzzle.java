@@ -98,7 +98,7 @@ public class Puzzle extends JFrame {
         jButton3.setVisible(false);
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        String[] EXTENSION=new String[]{"jpeg","jpg","png","bmp"};
+        String[] EXTENSION=new String[]{"jpeg", "jpg", "png", "bmp"};
         FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("Pliki obrazów", EXTENSION);
             fileChooser.setFileFilter(xmlfilter);
         int result = fileChooser.showOpenDialog(frame);
@@ -128,9 +128,9 @@ public class Puzzle extends JFrame {
         gamearray = new int[5][5];
         int ri;
         int rj;
-        for(int i=0;i<5;i++){
-            for(int j=0;j<5;j++){
-                gamearray[i][j]=-1;
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                gamearray[i][j] = -1;
             }
         }
         
@@ -143,16 +143,16 @@ public class Puzzle extends JFrame {
                 {
                     ri=random.nextInt(5);
                     rj=random.nextInt(5);
-                    if(gamearray[ri][rj]==-1)
+                    if(gamearray[ri][rj] == -1)
                     {
-                        gamearray[ri][rj]=(i-1)*5+(j-1);
+                        gamearray[ri][rj] = (i-1) * 5 + (j - 1);
                         break;
                     }
                 }
-                temp = image.getSubimage((i-1)*200, (j-1)*100, 200, 100);
+                temp = image.getSubimage((i - 1) * 200, (j - 1) * 100, 200, 100);
                 JLabel draggableImage = new JLabel(new ImageIcon(temp));
                 draggableImage.setSize(draggableImage.getPreferredSize());
-                draggableImage.setLocation((ri)*200, (rj)*100);                                                                    
+                draggableImage.setLocation((ri) * 200, (rj) * 100);                                                                    
                 dragger.makeDraggable(draggableImage);
                 contentPane.add(draggableImage);
             }
@@ -220,9 +220,9 @@ public class Puzzle extends JFrame {
                 }
                 
                 Scanner in = new Scanner(file);
-                jLabel1.setText("1."+in.nextLine());
-                jLabel2.setText("2."+in.nextLine());
-                jLabel3.setText("3."+in.nextLine());
+                jLabel1.setText("1." + in.nextLine());
+                jLabel2.setText("2." + in.nextLine());
+                jLabel3.setText("3." + in.nextLine());
                 jButton1.setVisible(false);
                 jButton2.setVisible(false);
                 jButton3.setVisible(false);
@@ -312,7 +312,7 @@ public class Puzzle extends JFrame {
     
     public static void menu()
     {
-                JButton buttonStart = new JButton("Start");
+        JButton buttonStart = new JButton("Start");
         buttonStart.setLocation(100, 100);
         buttonStart.setVisible(true);
         contentPane.add(buttonStart);  
